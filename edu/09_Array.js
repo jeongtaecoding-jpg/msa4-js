@@ -8,7 +8,7 @@ const arr1 = [1, 2, 3, 4, 5];
 
 console.log(arr1[4]);
 
-// length : 배열의 길이를 반환
+// length : 배열의 길이를 반환                         <   1순위!!!! >
 console.log(arr1.length);    
 
 const obj = {
@@ -40,7 +40,7 @@ console.log(arr.indexOf('도우너')); // 2 반환
 console.log(arr.indexOf('또치'));  // -1 반환
 
 
-// Array.push(...args) : number  ** 원본 변경 **
+// Array.push(...args) : number  ** 원본 변경 **                   <1순위!!!!!>
 // 원본 배열에 마지막 요소를 추가하고, 변경된 length를 반환
 arr = [1, 2, 3, {key1 : 'valid'}];
 // let arr2 = arr;
@@ -57,21 +57,21 @@ resultArr = arr.concat(4, 5, 6);
 console.log(arr, resultArr);
 
 
-// Array.pop() : T | undefined ** 원본 변경 **
+// Array.pop() : T | undefined ** 원본 변경 **                    < 1순위!!!! >
 //    원본 배열의 마지막 요소를 제거하고, 제거된 요소를 반환
 arr = [1, 2, 3];
 resultArr = arr.pop();
 console.log(arr, resultArr); 
 
 
-// Array.unshift(...args) : number ** 원본 변경 **
+// Array.unshift(...args) : number ** 원본 변경 **              <  1순위!!!! >
 //     원본 배열의 첫번째 요소를 추가하고, 변경된 length를 반환
 arr = [1, 2, 3];
 resultArr = arr.unshift(100, 200, 300);
 console.log(arr, resultArr);
 
 
-// Array.shift() : T | undefined  ** 원본 변경 **
+// Array.shift() : T | undefined  ** 원본 변경 **                 <  1순위!!!! >
 //     원본 배열의 첫번째 요소를 제거하고, 해당 요소를 반환
 arr = [1000, 2, 3];
 resultArr = arr.shift();
@@ -119,6 +119,108 @@ console.log(arr, resultArr);
 // test();
 // test('아아아아');
 
+
+// Array.sort() : T[] ** 원본 변경 **
+//    배열의 요소를 문자열로 변환 후, 오름차순 정렬을 하고 정렬한 배열을 반환
+// (a - b)가 양수일 경우, a가 큰수, b가 작은수로 인식하여 정렬
+// (a - b)가 음수일 경우, a가 작은수, b가 큰수로 인식하여 정렬
+// (a - b)가 0일 경우, 같은 값으로 인식하여 정렬하지 않음
+//    내림차순을 하고 싶을 땐 (a - b) 가 아닌, (b - a)로 바꾸면 된다.
+arr = [6, 4, 7, 1, 11];
+resultArr = arr.sort((a, b) => a - b);
+console.log(arr, resultArr);
+
+
+// Array.map(callback) : T[]                                 <<1순위!!!!!!!>>
+//    배열의 모든 요소에 대해 콜백 함수를 반복 실행한 후,
+//    콜백 함수의 리턴 값들을 모아서 새로운 배열을 반환
+arr = [1, 2, 3, 4, 5, 6];
+resultArr = arr.map(val => {
+  if(val % 3 === 0) {
+    return '짝';
+  } else {
+    
+    return val;
+  }
+});
+console.log(arr, resultArr);
+
+class MyArr{
+  arr = [1, 2, 3, 4, 5, 6];
+
+  map(cb) {
+  // 새로운 배열
+  const newArr = [];
+
+  for(let i = 0; i < this.arr.length; i++) {
+    newArr.push(cb(this.arr[i]));
+    }
+    return newArr;
+  }
+}
+// const test = new MyArr();
+// test.map(val => {
+//   if(val % 3 === 0) {
+//     return '짝';
+//   } else {
+    
+//     return val;
+//   }
+// });
+// console.log(`test: ${resultArr}`);
+
+
+// Array.some() : boolean
+//    배열의 모든 요소에 대해 콜백함수를 실행한 후,
+//    조건에 맞는 결과가 하나라도 있으면 true, 없으면 false를 반환
+arr = [
+   {name: '홍길동', age: 20},
+   {name: '둘리', age: 50},
+   {name: '또치', age: 45}
+];
+resultArr = arr.some(item => item.name === '도우너');
+console.log(arr, resultArr);
+
+
+// Array.every(callback) : boolean                        
+//      배열의 모든 요소에 대해 콜백 함수를 반복하여 실행한 후,
+//      모두 조건에 맞으면 true, 아니면 false를 반환
+arr = [
+   {name: '홍길동', age: 20},
+   {name: '둘리', age: 50},
+   {name: '또치', age: 45}
+];
+resultArr = arr.every(item => item.age >= 50);
+console.log(resultArr);
+
+
+// Array.filter(callback) : T[]
+//    배열의 모든 요소에 대해 콜백함수를 실행한 후,
+//    조건에 만족한 요소만 모아서 새로운 배열로 반환
+arr = [
+   {name: '홍길동', age: 20},
+   {name: '둘리', age: 50},
+   {name: '또치', age: 45}
+];
+resultArr = arr.filter(item => item.age < 50);
+console.log(resultArr);
+
+
+// Array.forEach(callback) : void
+//    배열의 모든 요소에 대해 콜백 함수를 반복 실행하고 싶을 때 사용
+arr = [
+   {name: '홍길동', age: 20},
+   {name: '둘리', age: 50},
+   {name: '또치', age: 45}
+];
+arr.forEach((val, idx) => {
+  // 내가 하고 싶은 처리
+  console.log(val, idx);
+});
+// for (let i = 0; i < arr.length; i++) {
+//   // 내가 하고 싶은 처리
+//   // arr[i];
+// }
 
 
 // ---------------------------------------------------
