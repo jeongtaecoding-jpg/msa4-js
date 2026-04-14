@@ -1,7 +1,37 @@
-.tile {
+/* 내 버전 */
+/* .tile {
   height: 110px;
   width: 110px;
   background-color:#fff;
   border: 1px solid #fff;
   position: absolute;
+} */
+
+
+
+
+
+
+/* 강사님 버전 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  position: absolute;
+  /* background-color: aqua; */
+  padding: 15px;
+}
+
+.box {
+  /* background-color: bisque;  TODO : 테스트 시작시 지우고 하기  */
+  width: 100px;
+  height: 100px;
+}
+
+.busted {
+  background-color: aqua;
 }
