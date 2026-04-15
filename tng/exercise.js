@@ -1,4 +1,2 @@
-const btn= document.querySelector('#btn');
-btn.addEventListener('click', () => {
-  alert("안녕!");
-});
+console.log(a);
+var a = 10;
