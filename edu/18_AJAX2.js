@@ -1,7 +1,6 @@
-const url = 'https://picsum.photos/v2/list?page=4&limit=5';
-
 const form = document.querySelector('form');
-form.addEventListener('submit', (e) => {
+
+form.addEventListener('submit', async (e) => {
   e.preventDefault();   // 기존 이벤트 취소
 
   const baseUrl = 'https://picsum.photos/v2/list';
@@ -11,23 +10,10 @@ form.addEventListener('submit', (e) => {
   const limit = form['limit'].value;
   const url = `${baseUrl}?page=${page}&limit=${limit}`;
 
-  // axios.get 기본 문법
-  // axios.get(url)
-  // .then(response => {
-  //   // 요청이 성공 했을 때, 처리 작성 부분
-  // })
-  // .catch(error => {
-  //   // 처리 중 예외가 발생했을 때, 처리 작성 부분
-  // })
-  // .finally(() => {
-  //   // 성공여부와 관계없이 필요한 처리 작성 부분 (finally는 생략 가능)
-  // });
-  
-  
-  
-  axios.get(url)
-  .then(response => {
-    // 카드들 넣을 컨테이너
+  try {
+    const response = await axios.get(url);
+
+       // 카드들 넣을 컨테이너
     const container = document.querySelector('.container');
     container.textContent = '';
   
@@ -55,11 +41,10 @@ form.addEventListener('submit', (e) => {
       // 컨테이너에 카드 삽입
       container.appendChild(newCard);
     });
-  })
-  .catch(error => {
-    console.error(error);
-  });
-})
+  } catch(error) {
+    console.log(error);
+  }
+});
 
 
 // const btnSearch = document.querySelector('#btnSearch');
